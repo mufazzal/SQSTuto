@@ -1,0 +1,76 @@
+service: SQSTuto
+provider:
+  name: aws
+  stage: beta
+  region: us-east-1  
+  runtime: nodejs12.x
+  profile: Mufazzal_Hussain
+  environment:
+    MufSQSQueUrl:
+      Ref: MufSQS
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - logs:CreateLogGroup
+      Resource: 'arn:aws:logs:*:*:*'
+
+functions:
+  SQSProducer:
+    handler: SQSproducer/src/handler.sqsProducer
+    layers: 
+     - arn:aws:lambda:us-east-1:388412347424:layer:commonLibs:5
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - SQS:SendMessage
+        - SQS:SendMessageBatch
+      Resource:
+          Fn::GetAtt: 
+          - MufSQS
+          - "Arn"
+    events:
+     - http:
+        path: /pushSqsMessage
+        method: POST
+        cors: true
+        authorizer:
+         arn: arn:aws:cognito-idp:us-east-1:388412347424:userpool/us-east-1_d8rcMtMXj
+
+  SQSConsumer:
+    handler: SQSConsumer/src/handler.sqsConsumer
+    layers: 
+     - arn:aws:lambda:us-east-1:388412347424:layer:commonLibs:5
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - SQS:ReceiveMessage
+      Resource:
+          Fn::GetAtt: 
+          - MufSQS
+          - "Arn"      
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MufSQS
+              - Arn
+          batchSize: 3
+
+package:
+  exclude:
+    - SQSproducer/node_modules/**  
+    - node_modules/**
+
+resources:
+  Resources:
+    MufSQS:
+      Type: AWS::SQS::Queue
+      Properties: 
+        QueueName: MufSQS-${self:provider.stage}
+
+plugins:
+  - serverless-iam-roles-per-function
+  
+    
