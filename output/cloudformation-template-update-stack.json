@@ -175,10 +175,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/SQSTuto/dev/1595512602853-2020-07-23T13:56:42.853Z/SQSProducer.zip"
+          "S3Key": "serverless/SQSTuto/dev/1597297689318-2020-08-13T05:48:09.318Z/SQSProducer.zip"
         },
         "FunctionName": "SQSTuto-dev-SQSProducer",
-        "Handler": "SQSproducer/src/handler.sqsProducer",
+        "Handler": "SQSProducer/src/handler.sqsProducer",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -204,14 +204,14 @@
         "SQSProducerLogGroup"
       ]
     },
-    "SQSProducerLambdaVersionzMNWpPF1mN1Td48B8puNq3zWSNmCYoTVBXZDpYYMy8": {
+    "SQSProducerLambdaVersionXsWmOtvdgRgxbHGbhiar4ysUc38CxThnvMPmdowin8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SQSProducerLambdaFunction"
         },
-        "CodeSha256": "s8MyUmbtt3VpGr+eJMS71pzWfxDhFR+f5wl8W72MWO8="
+        "CodeSha256": "AMVGUIuzeWb6m9WC3VgyKkcYPyC6fhyRKVaPNQVu4sw="
       }
     },
     "SQSConsumerLambdaFunction": {
@@ -221,7 +221,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/SQSTuto/dev/1595512602853-2020-07-23T13:56:42.853Z/SQSConsumer.zip"
+          "S3Key": "serverless/SQSTuto/dev/1597297689318-2020-08-13T05:48:09.318Z/SQSConsumer.zip"
         },
         "FunctionName": "SQSTuto-dev-SQSConsumer",
         "Handler": "SQSConsumer/src/handler.sqsConsumer",
@@ -250,14 +250,14 @@
         "SQSConsumerLogGroup"
       ]
     },
-    "SQSConsumerLambdaVersionPX10BeIpiRo3on5Hpx4g9NM3teCEGJB1xcf84aeTNg": {
+    "SQSConsumerLambdaVersion8pfYPmUZEfKV4JEsMEQuVcBrJUWNarVPa5M56U1k": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SQSConsumerLambdaFunction"
         },
-        "CodeSha256": "Bt95iotNhC3K8Z64uG7e2275TFLGinDh5r4NC4H0kfE="
+        "CodeSha256": "Q87aMbW6i8zJCLw1mlI3m5ROyXsvLBDMI0TUiwQJH4g="
       }
     },
     "ApiGatewayRestApi": {
@@ -394,7 +394,7 @@
         ]
       }
     },
-    "ApiGatewayDeployment1595512384317": {
+    "ApiGatewayDeployment1597297473153": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -671,13 +671,13 @@
     "SQSProducerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SQSProducerLambdaVersionzMNWpPF1mN1Td48B8puNq3zWSNmCYoTVBXZDpYYMy8"
+        "Ref": "SQSProducerLambdaVersionXsWmOtvdgRgxbHGbhiar4ysUc38CxThnvMPmdowin8"
       }
     },
     "SQSConsumerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SQSConsumerLambdaVersionPX10BeIpiRo3on5Hpx4g9NM3teCEGJB1xcf84aeTNg"
+        "Ref": "SQSConsumerLambdaVersion8pfYPmUZEfKV4JEsMEQuVcBrJUWNarVPa5M56U1k"
       }
     },
     "ServiceEndpoint": {
